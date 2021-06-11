@@ -2,17 +2,27 @@ package Cars;
 import Mechanics.*;
 import com.company.*;
 public abstract class Cars {
-    private Integer value;
-    private String manufacturer;
-    private Integer mileage;
+    public Double value;
+    public String manufacturer;
+    public Integer mileage;
     public String colour;
-    private String type;
-    private Boolean engine;
-    private Boolean suspension;
-    private Boolean body;
-    private Boolean brakes;
-    private Boolean transmission;
-    void repairJanusz(Cars what){
-
+    public String type;
+    public Boolean engine;
+    public Boolean suspension;
+    public Boolean body;
+    public Boolean brakes;
+    public Boolean transmission;
+    public Cars(Double value,String manufacturer,Integer mileage,String colour,String type){
+        this.value = value;
+        this.manufacturer = manufacturer;
+        this.mileage = mileage;
+        this.colour = colour;
+        this.type = type;
+    }
+    public void xD(){
+        System.out.println(this.colour);
+    }
+    public void halo(Integer he){
+        System.out.println(he);
     }
 }
