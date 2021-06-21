@@ -49,10 +49,10 @@ public class Main {
                     p1.carsToBuy();
                     break;
                 case 2:
-                    System.out.println("2");
+                    p1.buyACar();
                     break;
                 case 3:
-                    System.out.println("3");
+                    p1.ownedCars();
                     break;
                 case 4:
                     System.out.println("4");
