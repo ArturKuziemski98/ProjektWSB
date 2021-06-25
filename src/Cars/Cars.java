@@ -12,12 +12,17 @@ public abstract class Cars {
     public Boolean body;
     public Boolean brakes;
     public Boolean transmission;
-    public Cars(Double value,String manufacturer,Integer mileage,String colour,String type){
+    public Cars(Double value,String manufacturer,Integer mileage,String colour,String type,Boolean engine,Boolean suspension,Boolean body,Boolean brakes,Boolean transmission){
         this.value = value;
         this.manufacturer = manufacturer;
         this.mileage = mileage;
         this.colour = colour;
         this.type = type;
+        this.engine = engine;
+        this.suspension = suspension;
+        this.body = body;
+        this.brakes = brakes;
+        this.transmission = transmission;
     }
     public void xD(){
         System.out.println(this.colour);

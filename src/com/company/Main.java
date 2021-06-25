@@ -8,21 +8,21 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         Player p1 = new Player(1);
-        NormalCar n1 = new NormalCar(10000.00,"BMW",103000,"Black","Standard");
-        NormalCar n2 = new NormalCar(50000.00,"Honda",120000,"White","Budged");
-        NormalCar n3 = new NormalCar(30000.00,"Mercedes",200000,"Red","Budged");
-        NormalCar n4 = new NormalCar(12900.00,"Tesla",106000,"Black","Premium");
-        NormalCar n5 = new NormalCar(13801.00,"VW",100700,"Grey","Premium");
-        NormalCar n6 = new NormalCar(65902.00,"Lexus",103000,"Black","Standard");
-        NormalCar n7 = new NormalCar(43023.00,"Dacia",120000,"White","Budged");
-        NormalCar n8 = new NormalCar(30014.00,"Mercedes",200000,"Red","Budged");
-        NormalCar n9 = new NormalCar(42005.00,"Fiat",106000,"Black","Premium");
-        NormalCar n10 = new NormalCar(28006.00,"Ford",100700,"Grey","Premium");
-        DeliveryTruck d1 = new DeliveryTruck(2000.00,"Man",103000,"Black","Standard",320);
-        DeliveryTruck d2 = new DeliveryTruck(1000.00,"Dacia",120000,"White","Budged",400);
-        DeliveryTruck d3 = new DeliveryTruck(3000.00,"Mercedes",200000,"Red","Budged",120);
-        DeliveryTruck d4 = new DeliveryTruck(4200.00,"Fiat",106000,"Black","Premium",560);
-        DeliveryTruck d5 = new DeliveryTruck(2800.00,"Man",100700,"Grey","Premium",340);
+        NormalCar n1 = new NormalCar(10000.00,"BMW",103000,"Black","Standard",true,false,true,true,true);
+        NormalCar n2 = new NormalCar(50000.00,"Honda",120000,"White","Budged",false,true,true,false,false);
+        NormalCar n3 = new NormalCar(30000.00,"Mercedes",200000,"Red","Budged",false,false,true,false,false);
+        NormalCar n4 = new NormalCar(12900.00,"Tesla",106000,"Black","Premium",true,true,true,false,true);
+        NormalCar n5 = new NormalCar(13801.00,"VW",100700,"Grey","Premium",true,false,true,false,false);
+        NormalCar n6 = new NormalCar(65902.00,"Lexus",103000,"Black","Standard",true,true,true,true,false);
+        NormalCar n7 = new NormalCar(43023.00,"Dacia",120000,"White","Budged",false,false,true,false,false);
+        NormalCar n8 = new NormalCar(30014.00,"Mercedes",200000,"Red","Budged",false,true,false,false,false);
+        NormalCar n9 = new NormalCar(42005.00,"Fiat",106000,"Black","Premium",true,true,true,false,false);
+        NormalCar n10 = new NormalCar(28006.00,"Ford",100700,"Grey","Premium",false,true,true,false,true);
+        DeliveryTruck d1 = new DeliveryTruck(2000.00,"Man",103000,"Black","Standard",320,true,true,true,false,true);
+        DeliveryTruck d2 = new DeliveryTruck(1000.00,"Dacia",120000,"White","Budged",400,true,false,true,false,false);
+        DeliveryTruck d3 = new DeliveryTruck(3000.00,"Mercedes",200000,"Red","Budged",120,true,true,false,true,false);
+        DeliveryTruck d4 = new DeliveryTruck(4200.00,"Fiat",106000,"Black","Premium",560,false,false,false,false,false);
+        DeliveryTruck d5 = new DeliveryTruck(2800.00,"Man",100700,"Grey","Premium",340,false,false,true,false,true);
         p1.allCars[0] = n1;p1.allCars[1] = n2;p1.allCars[2] = n3 ; p1.allCars[3] = n4;p1.allCars[4] = n5;p1.allCars[5] = n6;p1.allCars[6] = n7;p1.allCars[7] = n8;p1.allCars[8] = n9;p1.allCars[9] = n10;
         p1.allCars[10] = d1;p1.allCars[11] = d2; p1.allCars[12] = d3;p1.allCars[13] = d4;p1.allCars[14] = d5;
 
@@ -55,7 +55,20 @@ public class Main {
                     p1.ownedCars();
                     break;
                 case 4:
-                    System.out.println("4");
+                    System.out.println("Who will repair your car? 1. Janusz 2.Marian 3.Adrian");
+                    int i= sc.nextInt();
+                    if(i==1) {
+                        p1.repairJanusz();
+                    }
+                    else if (i==2){
+
+                    }
+                    else if (i==3){
+
+                    }
+                    else{
+                        System.out.println("Please give a walid number from 1 to 3!");
+                    }
                     break;
                 case 5:
                     System.out.println("5");
