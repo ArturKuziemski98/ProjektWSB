@@ -58,13 +58,19 @@ public class Main {
                     System.out.println("Who will repair your car? 1. Janusz 2.Marian 3.Adrian");
                     int i= sc.nextInt();
                     if(i==1) {
-                        p1.repairJanusz();
+                        System.out.print("From the list of your cars, give a number of the car you want to repair: ");
+                        int g= sc.nextInt();
+                        p1.repairJanusz(5000.00,g);
                     }
                     else if (i==2){
-
+                        System.out.print("From the list of your cars, give a number of the car you want to repair: ");
+                        int g= sc.nextInt();
+                        p1.repairMarian(g);
                     }
                     else if (i==3){
-
+                        System.out.print("From the list of your cars, give a number of the car you want to repair: ");
+                        int g= sc.nextInt();
+                        p1.repairAdrian(g);
                     }
                     else{
                         System.out.println("Please give a walid number from 1 to 3!");

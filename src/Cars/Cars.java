@@ -24,6 +24,7 @@ public abstract class Cars {
         this.brakes = brakes;
         this.transmission = transmission;
     }
+
     public void xD(){
         System.out.println(this.colour);
     }
