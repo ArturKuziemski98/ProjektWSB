@@ -1,6 +1,7 @@
 package Cars;
 import Mechanics.*;
 import com.company.*;
+import Clients.*;
 public abstract class Cars {
     public Double value;
     public String manufacturer;

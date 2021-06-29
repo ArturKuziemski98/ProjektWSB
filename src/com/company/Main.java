@@ -2,12 +2,19 @@ package com.company;
 import Cars.*;
 import java.util.*;
 import Mechanics.*;
+import Clients.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         Player p1 = new Player(1);
+        Clients c1 = new Clients(true,20000.00,"BMW","Audi",false,false);
+        Clients c2 = new Clients(true,15000.00,"Mercedes","Ford",false,false);
+        Clients c3 = new Clients(true,19000.00,"Honda","Tesla",true,true);
+        Clients c4 = new Clients(false,20000.00,"Man","Dacia",false,false);
+        Clients c5 = new Clients(true,30000.00,"Dacia","Lexus",false,false);
+        p1.addC(c1);p1.addC(c2);
         NormalCar n1 = new NormalCar(10000.00,"BMW",103000,"Black","Standard",true,false,true,true,true);
         NormalCar n2 = new NormalCar(50000.00,"Honda",120000,"White","Budged",false,true,true,false,false);
         NormalCar n3 = new NormalCar(30000.00,"Mercedes",200000,"Red","Budged",false,false,true,false,false);
@@ -25,7 +32,6 @@ public class Main {
         DeliveryTruck d5 = new DeliveryTruck(2800.00,"Man",100700,"Grey","Premium",340,false,false,true,false,true);
         p1.allCars[0] = n1;p1.allCars[1] = n2;p1.allCars[2] = n3 ; p1.allCars[3] = n4;p1.allCars[4] = n5;p1.allCars[5] = n6;p1.allCars[6] = n7;p1.allCars[7] = n8;p1.allCars[8] = n9;p1.allCars[9] = n10;
         p1.allCars[10] = d1;p1.allCars[11] = d2; p1.allCars[12] = d3;p1.allCars[13] = d4;p1.allCars[14] = d5;
-
         int a=0;
         do {
             System.out.println("MENU");
@@ -77,7 +83,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    System.out.println("5");
+                    p1.potentialC();
                     break;
                 case 6:
                     System.out.println("6");
@@ -86,7 +92,7 @@ public class Main {
                     System.out.println("7");
                     break;
                 case 8:
-                    System.out.println("8");
+                    p1.cash();
                     break;
                 case 9:
                     System.out.println("9");

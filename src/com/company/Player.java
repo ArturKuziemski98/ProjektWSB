@@ -1,6 +1,7 @@
 package com.company;
 import Cars.*;
 import Mechanics.*;
+import Clients.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,11 +9,18 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Player {
     Scanner sc= new Scanner(System.in);
     private Integer id;
+    private ArrayList<Clients> clients = new ArrayList<Clients>(2);
     private  Double cash = 100000.00;
     public Cars[] allCars = new Cars[15];
     private ArrayList<Cars> ownedCars = new ArrayList<Cars>(3);
     public Player(Integer id){
         this.id = id;
+    }
+    public void potentialC(){
+       System.out.println("Potential buyers: "+this.clients);
+    }
+    public void addC(Clients c){
+        this.clients.add(c);
     }
     public void carsToBuy(){
         for (int i=0;i< allCars.length ;i++) {
@@ -33,7 +41,6 @@ public class Player {
         this.carWash(i);
         this.tax(i);
         System.out.println("Car bought successfully!");
-        System.out.println(this.cash);
         }
         else {
             System.out.println("You need more cash in order to afford that car!");
@@ -120,5 +127,8 @@ public class Player {
         double ta = this.allCars[t].value * 0.02;
         this.cash = this.cash - ta;
         System.out.println("Tax has been paid! IRS is not looking for you, yet !"+ta);
+    }
+    public void cash(){
+        System.out.println("Your cash: "+this.cash);
     }
 }
