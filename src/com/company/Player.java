@@ -1,9 +1,10 @@
 package com.company;
-import Cars.*;
+import Cars.Cars;
 import Mechanics.*;
 import Clients.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Player {
@@ -15,6 +16,12 @@ public class Player {
     private ArrayList<Cars> ownedCars = new ArrayList<Cars>(3);
     public Player(Integer id){
         this.id = id;
+    }
+    public Double getCash(){
+        return this.cash;
+    }
+    public void setName(Double newCash){
+        this.cash = newCash;
     }
     public void potentialC(){
        System.out.println("Potential buyers: "+this.clients);
@@ -47,6 +54,7 @@ public class Player {
         }
     }
     public void repairJanusz(Double rCash,Integer g){
+        this.ownedCars.get(g).setSum(this.ownedCars.get(g).getSum() + 5000.00);
         System.out.println("1.Transmission: "+this.ownedCars.get(g).transmission+" 2.Brakes: "+this.ownedCars.get(g).brakes+" 3.Suspension: "+this.ownedCars.get(g).suspension+" 4.Body: "+this.ownedCars.get(g).body+" 5.Engine: "+this.ownedCars.get(g).engine);
         System.out.println("From the list of the parts what part you want to repair: ");
         int x =sc.nextInt();
@@ -80,6 +88,7 @@ public class Player {
         }
     }
     public void repairMarian(Integer g){
+        this.ownedCars.get(g).setSum(this.ownedCars.get(g).getSum() + 5000.00);
         int randomNum = ThreadLocalRandom.current().nextInt(1, 101);
         if (randomNum >=1 && randomNum <=10){
             System.out.println("Marian didn't fix this part and had to call Janusz for help.");
@@ -91,6 +100,7 @@ public class Player {
         }
     }
     public void repairAdrian(Integer g){
+        this.ownedCars.get(g).setSum(this.ownedCars.get(g).getSum() + 5000.00);
         int randomNum = ThreadLocalRandom.current().nextInt(1, 101);
         if (randomNum >=1 && randomNum <=10){
             System.out.println("Adrian didn't fix the part.");
@@ -130,5 +140,10 @@ public class Player {
     }
     public void cash(){
         System.out.println("Your cash: "+this.cash);
+    }
+    public void sumRAW(){
+        System.out.println("What car do you want to see the sum of repairs and washes?");
+        int i= sc.nextInt();
+        System.out.println("Sum of repairs and washes for car with Id 0: "+this.ownedCars.get(i).getSum());
     }
 }

@@ -1,7 +1,9 @@
 package Cars;
+import java.util.*;
 import Mechanics.*;
 import com.company.*;
 import Clients.*;
+import java.util.Scanner;
 public abstract class Cars {
     public Double value;
     public String manufacturer;
@@ -13,6 +15,8 @@ public abstract class Cars {
     public Boolean body;
     public Boolean brakes;
     public Boolean transmission;
+    private Double sum = 0.00;
+    Scanner sc= new Scanner(System.in);
     public Cars(Double value,String manufacturer,Integer mileage,String colour,String type,Boolean engine,Boolean suspension,Boolean body,Boolean brakes,Boolean transmission){
         this.value = value;
         this.manufacturer = manufacturer;
@@ -25,11 +29,11 @@ public abstract class Cars {
         this.brakes = brakes;
         this.transmission = transmission;
     }
+    public double getSum(){
+        return this.sum;
+    }
+    public void setSum(double newSum){
+        this.sum = newSum;
+    }
 
-    public void xD(){
-        System.out.println(this.colour);
-    }
-    public void halo(Integer he){
-        System.out.println(he);
-    }
 }

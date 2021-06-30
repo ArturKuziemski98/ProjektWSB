@@ -101,7 +101,7 @@ public class Main {
                     System.out.println("10");
                     break;
                 case 11:
-                    System.out.println("11");
+                    p1.sumRAW();
                     break;
                 case 12:
                     System.out.println("Exit!");
