@@ -9,14 +9,23 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         Player p1 = new Player(1);
-        Clients c1 = new Clients(true,20000.00,"BMW","Audi",false,false);
-        Clients c2 = new Clients(true,15000.00,"Mercedes","Ford",false,false);
-        Clients c3 = new Clients(true,19000.00,"Honda","Tesla",true,true);
-        Clients c4 = new Clients(false,20000.00,"Man","Dacia",false,false);
-        Clients c5 = new Clients(true,30000.00,"Dacia","Lexus",false,false);
+        Clients c1 = new Clients("Cars.NormalCar",20000.00,"BMW","Audi",false,false);
+        Clients c2 = new Clients("Cars.NormalCar",15000.00,"BMW","Ford",true,true);
+        Clients c3 = new Clients("Cars.NormalCar",19000.00,"Honda","Tesla",true,true);
+        Clients c4 = new Clients("Cars.DeliveryTruck",20000.00,"Man","Dacia",false,false);
+        Clients c5 = new Clients("Cars.DeliveryTruck",30000.00,"Dacia","Lexus",false,false);
         p1.addC(c1);p1.addC(c2);
-        NormalCar n1 = new NormalCar(10000.00,"BMW",103000,"Black","Standard",true,false,true,true,true);
-        NormalCar n2 = new NormalCar(50000.00,"Honda",120000,"White","Budged",false,true,true,false,false);
+        Clients ac1 = new Clients("Cars.NormalCar",20000.00,"BMW1","Audi",false,false);
+        Clients ac2 = new Clients("Cars.DeliveryTruck",20000.00,"BMW2","Audi",false,false);
+        Clients ac3 = new Clients("Cars.NormalCar",20000.00,"BMW3","Audi",false,false);
+        Clients ac4 = new Clients("Cars.NormalCar",20000.00,"BMW4","Audi",false,false);
+        Clients ac5 = new Clients("Cars.DeliverTruck",20000.00,"BMW5","Audi",false,false);
+        Clients ac6 = new Clients("Cars.NormalCar",20000.00,"BMW6","Audi",false,false);
+        Clients ac7 = new Clients("Cars.DeliveryTruck",20000.00,"BMW7","Audi",false,false);
+        Clients ac8 = new Clients("Cars.NormalCar",20000.00,"BMW85","Audi",false,false);
+        p1.addAC(ac1);p1.addAC(ac2);p1.addAC(ac3);p1.addAC(ac4);p1.addAC(ac5);p1.addAC(ac6);p1.addAC(ac7);p1.addAC(ac8);
+        NormalCar n1 = new NormalCar(10000.00,"BMW",103000,"Black","Standard",true,true,true,false,true);
+        NormalCar n2 = new NormalCar(10000.00,"BMW",120000,"White","Budged",false,false,true,true,true);
         NormalCar n3 = new NormalCar(30000.00,"Mercedes",200000,"Red","Budged",false,false,true,false,false);
         NormalCar n4 = new NormalCar(12900.00,"Tesla",106000,"Black","Premium",true,true,true,false,true);
         NormalCar n5 = new NormalCar(13801.00,"VW",100700,"Grey","Premium",true,false,true,false,false);
@@ -86,16 +95,17 @@ public class Main {
                     p1.potentialC();
                     break;
                 case 6:
-                    System.out.println("6");
+
+                    p1.sell();
                     break;
                 case 7:
-                    System.out.println("7");
+                    p1.AD();
                     break;
                 case 8:
                     p1.cash();
                     break;
                 case 9:
-                    System.out.println("9");
+                    p1.HistoryT();
                     break;
                 case 10:
                     System.out.println("10");
