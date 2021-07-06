@@ -75,7 +75,7 @@ public class Main {
                     if(i==1) {
                         System.out.print("From the list of your cars, give a number of the car you want to repair: ");
                         int g= sc.nextInt();
-                        p1.repairJanusz(5000.00,g);
+                        p1.repairJanusz(5000.00,g,"Janusz");
                     }
                     else if (i==2){
                         System.out.print("From the list of your cars, give a number of the car you want to repair: ");
@@ -108,7 +108,7 @@ public class Main {
                     p1.HistoryT();
                     break;
                 case 10:
-                    System.out.println("10");
+                    p1.historyRR();
                     break;
                 case 11:
                     p1.sumRAW();
@@ -120,6 +120,6 @@ public class Main {
                     System.out.println("Please chose an option from the list!");
             }
         }
-        while(a!=12);
+        while(a!=12 && p1.getCash() <= 200000.00);
     }
 }

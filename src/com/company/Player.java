@@ -2,6 +2,8 @@ package com.company;
 import java.lang.Class;
 import Cars.Cars;
 import Clients.*;
+import Mechanics.Mechanic;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,9 +15,10 @@ public class Player {
     private ArrayList<Clients> clients = new ArrayList<Clients>(2);
     private ArrayList<Cars> ownedCars = new ArrayList<Cars>(3);
     private ArrayList<String> historyT = new ArrayList<String>(1);
+    private ArrayList<String> historyR = new ArrayList<String>(1);
     public Cars[] allCars = new Cars[15];
     private Integer id;
-    private  Double cash = 100000.00;
+    private  Double cash = 200000.00;
     public Player(Integer id){
         this.id = id;
     }
@@ -61,7 +64,7 @@ public class Player {
             System.out.println("You need more cash in order to afford that car!");
         }
     }
-    public void repairJanusz(Double rCash,Integer g){
+    public void repairJanusz(Double rCash,Integer g,String who){
         this.ownedCars.get(g).setSum(this.ownedCars.get(g).getSum() + 5000.00);
         System.out.println("1.Transmission: "+this.ownedCars.get(g).transmission+" 2.Brakes: "+this.ownedCars.get(g).brakes+" 3.Suspension: "+this.ownedCars.get(g).suspension+" 4.Body: "+this.ownedCars.get(g).body+" 5.Engine: "+this.ownedCars.get(g).engine);
         System.out.println("From the list of the parts what part you want to repair: ");
@@ -70,26 +73,35 @@ public class Player {
             this.cash = this.cash - rCash;
             this.ownedCars.get(g).transmission = true;
             this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.5;
+            this.historyR(this.ownedCars.get(g).manufacturer,who,"transmission",rCash);
         }
         else if ( x == 2 && !this.ownedCars.get(g).brakes){
             this.cash = this.cash - rCash;
             this.ownedCars.get(g).brakes = true;
             this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.1;
+            this.historyR(this.ownedCars.get(g).manufacturer,who,"brakes",rCash);
+
         }
         else if ( x == 3 && !this.ownedCars.get(g).suspension){
             this.cash = this.cash - rCash;
             this.ownedCars.get(g).suspension = true;
             this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.2;
+            this.historyR(this.ownedCars.get(g).manufacturer,who,"suspension",rCash);
+
         }
         else if ( x == 4 && !this.ownedCars.get(g).body){
             this.cash = this.cash - rCash;
             this.ownedCars.get(g).body = true;
             this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.5;
+            this.historyR(this.ownedCars.get(g).manufacturer,who,"body",rCash);
+
         }
         else if ( x == 5 && !this.ownedCars.get(g).engine){
             this.cash = this.cash - rCash;
             this.ownedCars.get(g).engine = true;
             this.ownedCars.get(g).value = this.ownedCars.get(g).value * 2;
+            this.historyR(this.ownedCars.get(g).manufacturer,who,"engine",rCash);
+
         }
         else {
             System.out.println("Please give proper numbers!(You cant repair something thats not broken(true))");
@@ -100,11 +112,12 @@ public class Player {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 101);
         if (randomNum >=1 && randomNum <=10){
             System.out.println("Marian didn't fix this part and had to call Janusz for help.");
-            this.repairJanusz(5000.00,g);
+            this.repairJanusz(5000.00,g,"Janusz");
         }
         else {
             System.out.println("Marian fixed this part!");
-            this.repairJanusz(3000.00,g);
+            this.repairJanusz(3000.00,g,"Mariusz");
+
         }
     }
     public void repairAdrian(Integer g){
@@ -135,7 +148,7 @@ public class Player {
             }
         }
          else {
-             this.repairJanusz(1000.00,g);
+             this.repairJanusz(1000.00,g,"Adrian");
          }
     }
     public void carWash(Integer h){
@@ -152,7 +165,7 @@ public class Player {
     public void sumRAW(){
         System.out.println("What car do you want to see the sum of repairs and washes?");
         int i= sc.nextInt();
-        System.out.println("Sum of repairs and washes for car with Id 0: "+this.ownedCars.get(i).getSum());
+        System.out.println("Sum of repairs and washes for car with Id: "+i+this.ownedCars.get(i).getSum());
     }
     public void AD(){
         int randomNum = ThreadLocalRandom.current().nextInt(1, this.allClients.size());
@@ -217,8 +230,16 @@ public class Player {
         this.historyT.add("Car: "+car.manufacturer+" Client: "+client+" Price: "+price+" Action: "+sb);
     }
     public void HistoryT(){
-        for (int i =0;i<historyT.size();i++){
-            System.out.println(historyT.get(i));
+        for (String s : historyT) {
+            System.out.println(s);
+        }
+    }
+    public void historyR(String car,String mechanic,String what,Double price){
+        this.historyR.add("Car: "+car+" Mechanic: "+mechanic+" What: "+what+" price:"+price);
+    }
+    public void historyRR(){
+        for (String s : historyR) {
+            System.out.println(s);
         }
     }
 }
