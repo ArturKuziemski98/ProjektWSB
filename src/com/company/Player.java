@@ -11,12 +11,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Player {
     Scanner sc= new Scanner(System.in);
 
-    private ArrayList<Clients> allClients = new ArrayList<Clients>(2);
-    private ArrayList<Clients> clients = new ArrayList<Clients>(2);
-    private ArrayList<Cars> ownedCars = new ArrayList<Cars>(3);
-    private ArrayList<String> historyT = new ArrayList<String>(1);
-    private ArrayList<String> historyR = new ArrayList<String>(1);
-    public Cars[] allCars = new Cars[15];
+    private final ArrayList<Clients> allClients = new ArrayList<Clients>(2);
+    private final ArrayList<Clients> clients = new ArrayList<Clients>(2);
+    private final ArrayList<Cars> ownedCars = new ArrayList<Cars>(3);
+    private final ArrayList<String> historyT = new ArrayList<String>(1);
+    private final ArrayList<String> historyR = new ArrayList<String>(1);
+    private final ArrayList<Cars> allCars = new ArrayList<Cars>(1);
+    private final ArrayList<Cars> carsToBuy = new ArrayList<Cars>(0);
     private Integer id;
     private  Double cash = 200000.00;
     public Player(Integer id){
@@ -39,25 +40,32 @@ public class Player {
     public void addAC(Clients c){
         this.allClients.add(c);
     }
+    public void addCar(Cars c) {this.allCars.add(c);}
+    public void addCarToBuy(Cars c){this.carsToBuy.add(c);}
+    public void addCart(){
+        int randomNum = ThreadLocalRandom.current().nextInt(1,this.carsToBuy.size());
+        this.addCar(this.carsToBuy.get(randomNum));
+    }
     public void carsToBuy(){
-        for (int i=0;i< allCars.length ;i++) {
-            System.out.println("Id: "+i+" Value: "+this.allCars[i].value+" Manufacturer: "+this.allCars[i].manufacturer);
+        for (int i=0;i< allCars.size() ;i++) {
+            System.out.println("Id: "+i+" Value: "+this.allCars.get(i).getValue()+" Manufacturer: "+this.allCars.get(i).getManufacturer());
         }
     }
     public void ownedCars(){
         for (int i=0;i< ownedCars.size() ;i++) {
-            System.out.println("Id: "+i+" Value: "+this.ownedCars.get(i).value+" Manufacturer: "+this.ownedCars.get(i).manufacturer+" Engine: "+this.ownedCars.get(i).engine+" Brakes: "+this.ownedCars.get(i).brakes+" Suspension: "+this.ownedCars.get(i).suspension+" Transmission: "+this.ownedCars.get(i).transmission+" Body: "+this.ownedCars.get(i).body);
+            System.out.println("Id: "+i+" Value: "+this.ownedCars.get(i).getValue()+" Manufacturer: "+this.ownedCars.get(i).getManufacturer()+" Engine: "+this.ownedCars.get(i).getEngine()+" Brakes: "+this.ownedCars.get(i).getBrakes()+" Suspension: "+this.ownedCars.get(i).getSuspension()+" Transmission: "+this.ownedCars.get(i).getTransmission()+" Body: "+this.ownedCars.get(i).getBody());
         }
     }
     public void buyACar(){
         System.out.print("From the list of all Cars, what car do you want to buy(give the number assosiated to it): ");
         int i= sc.nextInt();
-        if (this.cash > this.allCars[i].value){
-        this.cash = this.cash - this.allCars[i].value;
-        this.ownedCars.add(allCars[i]);
-        this.tHistoryS(this.ownedCars.get(i),null,this.ownedCars.get(i).value,"bought");
+        if (this.cash > this.allCars.get(i).getValue()){
+        this.cash = this.cash - this.allCars.get(i).getValue();
+        this.ownedCars.add(allCars.get(i));
+        this.tHistoryS(this.ownedCars.get(this.ownedCars.size()-1),null,this.ownedCars.get(this.ownedCars.size()-1).getValue(),"bought");
         this.carWash(i);
         this.tax(i);
+        this.addCart();
         System.out.println("Car bought successfully!");
         }
         else {
@@ -66,41 +74,41 @@ public class Player {
     }
     public void repairJanusz(Double rCash,Integer g,String who){
         this.ownedCars.get(g).setSum(this.ownedCars.get(g).getSum() + 5000.00);
-        System.out.println("1.Transmission: "+this.ownedCars.get(g).transmission+" 2.Brakes: "+this.ownedCars.get(g).brakes+" 3.Suspension: "+this.ownedCars.get(g).suspension+" 4.Body: "+this.ownedCars.get(g).body+" 5.Engine: "+this.ownedCars.get(g).engine);
+        System.out.println("1.Transmission: "+this.ownedCars.get(g).getTransmission()+" 2.Brakes: "+this.ownedCars.get(g).getBrakes()+" 3.Suspension: "+this.ownedCars.get(g).getSuspension()+" 4.Body: "+this.ownedCars.get(g).getBody()+" 5.Engine: "+this.ownedCars.get(g).getEngine());
         System.out.println("From the list of the parts what part you want to repair: ");
         int x =sc.nextInt();
-        if ( x == 1 && !this.ownedCars.get(g).transmission){
+        if ( x == 1 && !this.ownedCars.get(g).getTransmission()){
             this.cash = this.cash - rCash;
-            this.ownedCars.get(g).transmission = true;
-            this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.5;
-            this.historyR(this.ownedCars.get(g).manufacturer,who,"transmission",rCash);
+            this.ownedCars.get(g).setTransmission(true);
+            this.ownedCars.get(g).setValue(this.ownedCars.get(g).getValue() * 1.5);
+            this.historyR(this.ownedCars.get(g).getManufacturer(),who,"transmission",rCash);
         }
-        else if ( x == 2 && !this.ownedCars.get(g).brakes){
+        else if ( x == 2 && !this.ownedCars.get(g).getBrakes()){
             this.cash = this.cash - rCash;
-            this.ownedCars.get(g).brakes = true;
-            this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.1;
-            this.historyR(this.ownedCars.get(g).manufacturer,who,"brakes",rCash);
+            this.ownedCars.get(g).setBrakes(true);
+            this.ownedCars.get(g).setValue(this.ownedCars.get(g).getValue() * 1.1);
+            this.historyR(this.ownedCars.get(g).getManufacturer(),who,"brakes",rCash);
 
         }
-        else if ( x == 3 && !this.ownedCars.get(g).suspension){
+        else if ( x == 3 && !this.ownedCars.get(g).getSuspension()){
             this.cash = this.cash - rCash;
-            this.ownedCars.get(g).suspension = true;
-            this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.2;
-            this.historyR(this.ownedCars.get(g).manufacturer,who,"suspension",rCash);
+            this.ownedCars.get(g).setSuspension(true);
+            this.ownedCars.get(g).setValue( this.ownedCars.get(g).getValue() * 1.2);
+            this.historyR(this.ownedCars.get(g).getManufacturer(),who,"suspension",rCash);
 
         }
-        else if ( x == 4 && !this.ownedCars.get(g).body){
+        else if ( x == 4 && !this.ownedCars.get(g).getBody()){
             this.cash = this.cash - rCash;
-            this.ownedCars.get(g).body = true;
-            this.ownedCars.get(g).value = this.ownedCars.get(g).value * 1.5;
-            this.historyR(this.ownedCars.get(g).manufacturer,who,"body",rCash);
+            this.ownedCars.get(g).setBody(true);
+            this.ownedCars.get(g).setValue(this.ownedCars.get(g).getValue() * 1.5);
+            this.historyR(this.ownedCars.get(g).getManufacturer(),who,"body",rCash);
 
         }
-        else if ( x == 5 && !this.ownedCars.get(g).engine){
+        else if ( x == 5 && !this.ownedCars.get(g).getEngine()){
             this.cash = this.cash - rCash;
-            this.ownedCars.get(g).engine = true;
-            this.ownedCars.get(g).value = this.ownedCars.get(g).value * 2;
-            this.historyR(this.ownedCars.get(g).manufacturer,who,"engine",rCash);
+            this.ownedCars.get(g).setEngine(true);
+            this.ownedCars.get(g).setValue(this.ownedCars.get(g).getValue() * 2);
+            this.historyR(this.ownedCars.get(g).getManufacturer(),who,"engine",rCash);
 
         }
         else {
@@ -127,24 +135,24 @@ public class Player {
             System.out.println("Adrian didn't fix the part.");
         }
          if (randomNum >= 11 && randomNum <= 12){
-            if(this.ownedCars.get(g).engine){
+            if(this.ownedCars.get(g).getEngine()){
             System.out.println("Adrian broke the engine :(");
-            this.ownedCars.get(g).engine = false;
+            this.ownedCars.get(g).setEngine(false);
             }
-            else if(this.ownedCars.get(g).body){
+            else if(this.ownedCars.get(g).getBody()){
                 System.out.println("Adrian broke the engine :(");
-                this.ownedCars.get(g).body = false;
+                this.ownedCars.get(g).setBody(false);
             }
-            else if(this.ownedCars.get(g).brakes){
+            else if(this.ownedCars.get(g).getBrakes()){
                 System.out.println("Adrian broke the engine :(");
-                this.ownedCars.get(g).brakes = false;
-            }else if(this.ownedCars.get(g).suspension){
+                this.ownedCars.get(g).setBrakes(false);
+            }else if(this.ownedCars.get(g).getSuspension()){
                 System.out.println("Adrian broke the engine :(");
-                this.ownedCars.get(g).suspension = false;
+                this.ownedCars.get(g).setSuspension(false);
             }
-            else if(this.ownedCars.get(g).transmission){
+            else if(this.ownedCars.get(g).getTransmission()){
                 System.out.println("Adrian broke the engine :(");
-                this.ownedCars.get(g).transmission = false;
+                this.ownedCars.get(g).setTransmission(false);
             }
         }
          else {
@@ -155,7 +163,7 @@ public class Player {
         System.out.println("Car has been washed! You washed it with your own hands.");
     }
     public void tax(Integer t){
-        double ta = this.allCars[t].value * 0.02;
+        double ta = this.allCars.get(t).getValue() * 0.02;
         this.cash = this.cash - ta;
         System.out.println("Tax has been paid! IRS is not looking for you, yet !"+ta);
     }
@@ -165,6 +173,10 @@ public class Player {
     public void sumRAW(){
         System.out.println("What car do you want to see the sum of repairs and washes?");
         int i= sc.nextInt();
+        if(a1(i)){
+            System.out.println("You don't have a car/wrong Car ID.");
+        }
+        else
         System.out.println("Sum of repairs and washes for car with Id: "+i+this.ownedCars.get(i).getSum());
     }
     public void AD(){
@@ -188,26 +200,38 @@ public class Player {
             System.out.println("Please put a proper number!");
         }
     }
+    public boolean a1(Integer j){
+        return (this.ownedCars.size() - 1) < j;
+    }
+    public boolean a2(Integer j){
+        return (this.clients.size() -1) < j;
+    }
     public void sell(){
     System.out.println("Write the Id of the car you want to sell: ");
         int i= sc.nextInt();
         System.out.println("To whom are you selling that car, Id: ");
         int g= sc.nextInt();
-        if(clients.get(g).getcCash() < this.ownedCars.get(i).value){
+        if (a1(i)){
+            System.out.println("Wrong Car ID, try again.");
+        }
+        else if (a2(g)){
+            System.out.println("Wrong Client ID, try again.");
+        }
+        else if(clients.get(g).getcCash() < this.ownedCars.get(i).getValue()){
             System.out.println("Potential buyer cant afford that car!");
         }
-        else if(this.clients.get(g).getBrokenS() == this.ownedCars.get(i).suspension || (!this.ownedCars.get(i).engine || !this.ownedCars.get(i).brakes || !this.ownedCars.get(i).body || !this.ownedCars.get(i).transmission)){
+        else if(this.clients.get(g).getBrokenS() == this.ownedCars.get(i).getSuspension() || (!this.ownedCars.get(i).getEngine() || !this.ownedCars.get(i).getBrakes() || !this.ownedCars.get(i).getBody() || !this.ownedCars.get(i).getTransmission())){
         System.out.println("This potential buyer only buys with broken suspension or working Cars!");
         }
-        else if (this.clients.get(g).getBroken() ==(this.ownedCars.get(i).transmission && this.ownedCars.get(i).body && this.ownedCars.get(i).suspension && this.ownedCars.get(i).engine && this.ownedCars.get(i).brakes) ) {
+        else if (this.clients.get(g).getBroken() ==(this.ownedCars.get(i).getTransmission() && this.ownedCars.get(i).getBody() && this.ownedCars.get(i).getSuspension() && this.ownedCars.get(i).getEngine() && this.ownedCars.get(i).getBrakes()) ) {
             System.out.println("This potential buyer doesn't buy broken cars");
         }
         else if (this.ownedCars.get(i).getClass().getName() != this.clients.get(g).getType()){
             System.out.println("Potential buyer doesn't want the car type you are selling!");
         }
-        else if (!clients.get(g).getiMark1().equals(this.ownedCars.get(i).manufacturer)) {
+        else if (!clients.get(g).getiMark1().equals(this.ownedCars.get(i).getManufacturer())) {
             System.out.println("Potential buyer doesn't want the car you are selling.1");
-            if (!clients.get(g).getiMark2().equals(this.ownedCars.get(i).manufacturer)) {
+            if (!clients.get(g).getiMark2().equals(this.ownedCars.get(i).getManufacturer())) {
                 System.out.println("Potential buyer doesn't want the car you are selling.2");
             }
         }
@@ -217,8 +241,8 @@ public class Player {
             this.clients.add(this.allClients.get(randomNum));
             this.clients.add(this.allClients.get(randomNum1));
             System.out.println(this.ownedCars.get(i).getClass().getName());
-            this.setCash(this.getCash()+this.ownedCars.get(i).value);
-            this.tHistoryS(this.ownedCars.get(i),this.clients.get(g),this.ownedCars.get(i).value,"sold");
+            this.setCash(this.getCash()+this.ownedCars.get(i).getValue());
+            this.tHistoryS(this.ownedCars.get(i),this.clients.get(g),this.ownedCars.get(i).getValue(),"sold");
             this.carWash(i);
             this.tax(i);
             this.ownedCars.remove(i);
@@ -227,7 +251,7 @@ public class Player {
         }
     }
     public void tHistoryS(Cars car,Clients client,Double price,String sb){
-        this.historyT.add("Car: "+car.manufacturer+" Client: "+client+" Price: "+price+" Action: "+sb);
+        this.historyT.add("Car: "+car.getManufacturer()+" Client: "+client+" Price: "+price+" Action: "+sb);
     }
     public void HistoryT(){
         for (String s : historyT) {
