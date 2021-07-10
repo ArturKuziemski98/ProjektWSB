@@ -18,6 +18,16 @@ public class Player {
     private final ArrayList<String> historyR = new ArrayList<String>(1);
     private final ArrayList<Cars> allCars = new ArrayList<Cars>(1);
     private final ArrayList<Cars> carsToBuy = new ArrayList<Cars>(0);
+
+    public Integer getMoves() {
+        return moves;
+    }
+
+    public void setMoves(Integer moves) {
+        this.moves = moves;
+    }
+
+    private Integer moves =0;
     private Integer id;
     private  Double cash = 200000.00;
     public Player(Integer id){
@@ -59,13 +69,17 @@ public class Player {
     public void buyACar(){
         System.out.print("From the list of all Cars, what car do you want to buy(give the number assosiated to it): ");
         int i= sc.nextInt();
-        if (this.cash > this.allCars.get(i).getValue()){
+        if ((this.allCars.size() -1) < i){
+            System.out.println("Wrong Car ID.");
+        }
+        else if (this.cash > this.allCars.get(i).getValue()){
         this.cash = this.cash - this.allCars.get(i).getValue();
         this.ownedCars.add(allCars.get(i));
         this.tHistoryS(this.ownedCars.get(this.ownedCars.size()-1),null,this.ownedCars.get(this.ownedCars.size()-1).getValue(),"bought");
         this.carWash(i);
         this.tax(i);
         this.addCart();
+        this.moves +=1;
         System.out.println("Car bought successfully!");
         }
         else {
@@ -77,6 +91,7 @@ public class Player {
         System.out.println("1.Transmission: "+this.ownedCars.get(g).getTransmission()+" 2.Brakes: "+this.ownedCars.get(g).getBrakes()+" 3.Suspension: "+this.ownedCars.get(g).getSuspension()+" 4.Body: "+this.ownedCars.get(g).getBody()+" 5.Engine: "+this.ownedCars.get(g).getEngine());
         System.out.println("From the list of the parts what part you want to repair: ");
         int x =sc.nextInt();
+        this.moves +=1;
         if ( x == 1 && !this.ownedCars.get(g).getTransmission()){
             this.cash = this.cash - rCash;
             this.ownedCars.get(g).setTransmission(true);
@@ -112,7 +127,7 @@ public class Player {
 
         }
         else {
-            System.out.println("Please give proper numbers!(You cant repair something thats not broken(true))");
+            System.out.println("Please give proper numbers!(You cant repair something that's not broken(true))");
         }
     }
     public void repairMarian(Integer g){
@@ -185,6 +200,7 @@ public class Player {
         int randomNum2 = ThreadLocalRandom.current().nextInt(1, this.allClients.size());
         System.out.println("What type of Ad you want to run? 1.Newspaper AD / 2.Internet AD");
         int i= sc.nextInt();
+        this.moves +=1;
         if (i==1){
             System.out.println("Newspaper AD");
             this.cash = this.cash - 1000.00;
@@ -211,6 +227,7 @@ public class Player {
         int i= sc.nextInt();
         System.out.println("To whom are you selling that car, Id: ");
         int g= sc.nextInt();
+        this.moves +=1;
         if (a1(i)){
             System.out.println("Wrong Car ID, try again.");
         }

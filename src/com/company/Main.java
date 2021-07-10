@@ -138,5 +138,6 @@ public class Main {
             }
         }
         while(a!=12 && p1.getCash() <= 200000.00);
+        System.out.println("You won/exited the game with: "+p1.getMoves()+"moves");
     }
 }
