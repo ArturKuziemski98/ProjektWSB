@@ -235,7 +235,7 @@ public class Player {
         int i= sc.nextInt();
         System.out.println("To whom are you selling that car, Id: ");
         int g= sc.nextInt();
-        this.moves +=1;
+
         if (a1(i)){
             System.out.println("Wrong Car ID, try again.");
         }
@@ -270,6 +270,7 @@ public class Player {
             this.tHistoryS(this.ownedCars.get(i),this.clients.get(g),this.ownedCars.get(i).getValue(),"sold");
             this.carWash(i);
             this.tax(i);
+            this.moves +=1;
             this.clients.get(g).setcCash(this.clients.get(g).getcCash() - this.ownedCars.get(i).getValue());
             this.ownedCars.remove(i);
             System.out.println("Car sold to a potential buyer.");
