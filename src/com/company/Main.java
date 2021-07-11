@@ -6,10 +6,10 @@ import Clients.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc= new Scanner(System.in);
         Player p1 = new Player(1);
-        Clients c1 = new Clients("Cars.NormalCar",40000.00,"BMW","Audi",false,false);
+        Clients c1 = new Clients("Cars.NormalCar",400000.00,"BMW","Audi",false,false);
         Clients c2 = new Clients("Cars.NormalCar",76000.00,"BMW","Ford",true,true);
         Clients c3 = new Clients("Cars.NormalCar",56000.00,"Honda","Tesla",true,true);
         Clients c4 = new Clients("Cars.DeliveryTruck",87000.00,"Man","Dacia",false,false);
@@ -23,7 +23,7 @@ public class Main {
         Clients ac6 = new Clients("Cars.NormalCar",64000.00,"Ford","BMW",false,false);
         Clients ac7 = new Clients("Cars.DeliveryTruck",30000.00,"Man","Mercedes",false,false);
         Clients ac8 = new Clients("Cars.NormalCar",60000.00,"Fiat","Audi",false,false);
-        p1.addAC(ac1);p1.addAC(ac2);p1.addAC(ac3);p1.addAC(ac4);p1.addAC(ac5);p1.addAC(ac6);p1.addAC(ac7);p1.addAC(ac8);
+        p1.addAC(ac1);p1.addAC(ac2);p1.addAC(ac3);p1.addAC(ac4);p1.addAC(ac5);p1.addAC(ac6);p1.addAC(ac7);p1.addAC(ac8);p1.addAC(c3);p1.addAC(c4);p1.addAC(c5);
         NormalCar n1 = new NormalCar(50000.00,"BMW",103000,"Black","Standard",true,true,true,false,true);
         NormalCar n2 = new NormalCar(70500.00,"BMW",120000,"White","Budged",false,false,true,true,true);
         NormalCar n3 = new NormalCar(30000.00,"Mercedes",200000,"Red","Budged",false,false,true,false,false);
@@ -138,6 +138,6 @@ public class Main {
             }
         }
         while(a!=12 && p1.getCash() <= 200000.00);
-        System.out.println("You won/exited the game with: "+p1.getMoves()+"moves");
+        System.out.println("You won/exited the game with: "+p1.getMoves()+"moves and with, "+p1.getCash()+"Cash.");
     }
 }

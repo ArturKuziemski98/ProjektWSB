@@ -14,6 +14,10 @@ public class Clients {
         return cCash;
     }
 
+    public void setcCash(Double cCash) {
+        this.cCash = cCash;
+    }
+
     private Double cCash;
 
     public String getiMark1() {
